@@ -1,4 +1,4 @@
-# DO NOT MODIFY THIS FILE
+# DO NOT MODIFY THE CODE WITHIN EACH TEST
 # Run me via: python3 -m unittest test_model_reflex_vacuum
 
 import unittest
