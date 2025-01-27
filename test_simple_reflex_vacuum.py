@@ -3,6 +3,8 @@
 
 import unittest
 import time
+import contextlib
+import io
 from simple_reflex_vacuum import SimpleReflexVacuum
 
 
@@ -32,6 +34,17 @@ class TestSimpleReflexVacuum(unittest.TestCase):
         vacuum = SimpleReflexVacuum()
         vacuum.suck()
 
+    def test_suck_side_effect(self):
+        """
+        A SimpleReflexVacuum `suck` actuator causes a side effect in the
+        environment, which is simulated as printed output to the console.
+        """
+        vacuum = SimpleReflexVacuum()
+        with contextlib.redirect_stdout(io.StringIO()) as f:
+            vacuum.suck()
+            output = f.getvalue()
+        self.assertEqual("side effect: cause hardware to suck\n", output)
+
     def test_move_left(self):
         """
         A SimpleReflexVacuum can move left.
@@ -39,12 +52,34 @@ class TestSimpleReflexVacuum(unittest.TestCase):
         vacuum = SimpleReflexVacuum()
         vacuum.move_left()
 
+    def test_suck_move_left_side_effect(self):
+        """
+        A SimpleReflexVacuum `move_left` actuator causes a side effect in the
+        environment, which is simulated as printed output to the console.
+        """
+        vacuum = SimpleReflexVacuum()
+        with contextlib.redirect_stdout(io.StringIO()) as f:
+            vacuum.move_left()
+            output = f.getvalue()
+        self.assertEqual("side effect: cause hardware to move left\n", output)
+
     def test_move_right(self):
         """
         A SimpleReflexVacuum can move right.
         """
         vacuum = SimpleReflexVacuum()
         vacuum.move_right()
+
+    def test_suck_move_right_side_effect(self):
+        """
+        A SimpleReflexVacuum `move_right` actuator causes a side effect in the
+        environment, which is simulated as printed output to the console.
+        """
+        vacuum = SimpleReflexVacuum()
+        with contextlib.redirect_stdout(io.StringIO()) as f:
+            vacuum.move_right()
+            output = f.getvalue()
+        self.assertEqual("side effect: cause hardware to move right\n", output)
 
     """
     Agent function
