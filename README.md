@@ -20,22 +20,29 @@ There are two parts to this exercise.
 
 Complete the implementation of SimpleReflexVacuum found in
 _simple_reflex_vacuum.py_, and lean on the test suite in
-_test_simple_reflex_vacuum.py_ to guide your implementation. You will only need
-to stub the "actuator" methods. The `action` function should adhere to the spirit
+_test_simple_reflex_vacuum.py_ to guide your implementation. You will implement
+actuator functions, `suck`, `move_left`, and `move_right`, and the agent function,
+named `action`. The `action` function should adhere to the spirit
 of the SIMPLE-REFLEX-AGENT and REFLEX-VACUUM-AGENT functions specified by Russell
 & Norvig (AIMA Figures 2.8 and 2.10).
 
-Notice that REFLEX-VACUUM-AGENT has two parameters. The `action` method should
-receive its _percept_ in the form of two parameters: one representing whether
-there is dirt or not, and one representing the id of the perceived location.
+Notice that REFLEX-VACUUM-AGENT has two parameters. The `action` function should
+receive its _percept_ in the form of two parameters: one representing the id of
+the perceived location, and one representing whether there is dirt or not.
 
 The implementation can be a simple `if`-`elif` conditional statement, and it need
 not transform the percept into a full-fledged state object with an
 INTERPRET-INPUT subroutine as shown in the SIMPLE-REFLEX-AGENT function
 specification. The conditional statement shall represent the RULE-MATCH
-subroutine found in the specification. Lastly, the `action` method should return
+subroutine found in the specification. Lastly, the `action` function should return
 a function representing the rational action, such as the SimpleReflexVacuum's
 `suck` function.
+
+In a real robot vacuum, the actuator functions may affect hardware, such as
+turning on a motor, and therefore have side effects. Your actuator functions
+should simulate the side effect of affecting hardware by producing the side
+effect of printing. That way, when demonstrating the use of your agent, you can
+see some printed output when an action executed.
 
 You'll know this is complete when the tests found in _test_simple_reflex_vacuum.py_
 all pass. Run the test suite with `python3 test_simple_reflex_vacuum.py`. Then,
@@ -99,7 +106,7 @@ produces a different action based on the state of the world changing.
 
 See the example usage of an imaginary ModelReflexVacuum in _scratchpad.py_ to
 give you ideas about how a ModelReflexVacuum might be used, and what your code
-in _main.py_ might do. Notice how the `action` method is called multiple times
+in _main.py_ might do. Notice how the `action` function is called multiple times
 and returns a different action each time. The source code for a Location, State,
 TransitionModel and SensorModel are all provided to you - but you are not required
 to use them. If you do use them, feel free to modify them as you see fit. Reading
